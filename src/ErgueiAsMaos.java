@@ -7,12 +7,16 @@ public class ErgueiAsMaos {
     public static void main(String[] args) {
 
         System.out.println("\n\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-        System.out.println("Você já conhece a música do Padre Marcelo Rossi, Erguei as Mãos.\n" +
-                "Por isso, irei trazer a você a letra desse sucesso.\n" +
-                "Afinal, ela foi lançada em 1998.\n" +
-                "Ela tem duas partes, por isso você pode escolher relembrar de cada uma delas separadamente.\n" +
-                "Mas, se preferir, podemos trazer a letra inteira para você!\n" +
-                "\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\n");
+        System.out.println("""
+                Você já conhece a música do Padre Marcelo Rossi, Erguei as Mãos.
+                Por isso, irei trazer a você a letra desse sucesso.
+                Afinal, ela foi lançada em 1998.
+                Ela tem duas partes, por isso você pode escolher relembrar de cada uma delas separadamente.
+                Mas, se preferir, podemos trazer a letra inteira para você!
+
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+                """);
 
         Scanner opcao = new Scanner(System.in);
         int escolhida;
@@ -20,12 +24,15 @@ public class ErgueiAsMaos {
         //Menu interativo, permite ao usuário mostrar a letra até que deseje sair
         try {
             do {
-                System.out.print("Escolha uma opção: \n\n" +
-                        "1 - Mostrar somente a primeira parte da música;\n" +
-                        "2 - Mostrar somente a segunda parte da música;\n" +
-                        "3 - Mostrar toda a letra da música;\n" +
-                        "9 - Sair do programa\n\n" +
-                        "Digite a opção desejada: ");
+                System.out.print("""
+                        Escolha uma opção:
+
+                        1 - Mostrar somente a primeira parte da música;
+                        2 - Mostrar somente a segunda parte da música;
+                        3 - Mostrar toda a letra da música;
+                        9 - Sair do programa
+
+                        Digite a opção desejada:\s""");
                 escolhida = opcao.nextInt();
                 System.out.println("\n\n");
 
@@ -68,14 +75,23 @@ public class ErgueiAsMaos {
         }
     }
 
-
-    //M[etodos para os versos que se repetem
+    //Métodos para os versos que se repetem
     public static String primeiraParte() {
 
         return "Erguei as mãos e dai glória a Deus\n" +
                 "Erguei as mãos e dai glória a Deus\n" +
                 "Erguei as mãos\n" +
-                "E cantai com os filhos do Senhor.\n";
+                "E cantai com os filhos do Senhor\n";
+
+    }
+
+    public static String primeiraParte(int verso) {
+
+        return "Erguei as mãos e dai glória a Deus\n" +
+                "Erguei as mãos e dai glória a Deus\n" +
+                "Erguei as mãos\n" +
+                "E cantai com os filhos do Senhor (de novo!)\n";
+
     }
 
     public static String segundaParte(String artigo, String animal1, String animal2) {
@@ -94,12 +110,23 @@ public class ErgueiAsMaos {
                 "De madeira para os filhos do Senhor\n";
     }
 
-    public static String quartaParte() {
+    public static String quartaParte(int verso) {
 
-        return "\nO senhor tem muitos filhos\n" +
-                "Muitos filhos ele tem\n" +
-                "Eu sou um deles, você também\n" +
-                "Louvemos ao senhor\n";
+        if (verso == 0) {
+
+            return "\nO senhor tem muitos filhos\n" +
+                    "Todos filhos ele tem\n" +
+                    "Eu sou um deles, você também\n" +
+                    "Louvemos ao senhor\n";
+
+        } else {
+
+            return "\nO senhor tem muitos filhos\n" +
+                    "Muitos filhos ele tem\n" +
+                    "Eu sou um deles, você também\n" +
+                    "Louvemos ao senhor\n";
+
+        }
     }
 
     //Override do método, para adicionar as partes opcionais de fala do cantor
@@ -113,60 +140,64 @@ public class ErgueiAsMaos {
                     "Eu sou um deles, você também\n" +
                     "Louvemos ao senhor\n";
 
-        }
-        if (verso == 7) {
+        } else if (verso == 7) {
             versoQuatro = "\nO senhor tem muitos filhos" + fala + "\n" +
                     "Muitos filhos ele tem\n" +
                     "Eu sou um deles, você também\n" +
                     "Louvemos ao senhor\n";
-
         }
         return versoQuatro;
     }
 
     public static String quartaParte(int verso, String fala, String falaDois) {
 
-        String versoQuatro = "\nO senhor tem muitos filhos" + fala + "\n" +
+        return "\nO senhor tem muitos filhos" + fala + "\n" +
                 "Muitos filhos ele tem\n" +
                 "Eu sou um deles, você também" + falaDois + "\n" +
                 "Louvemos ao senhor\n";
-
-        return versoQuatro;
     }
 
     //Construindo a primeira parte da música
     public static String musicaUm() {
 
-        ArrayList<String> listaUm = new ArrayList<String>();
+        ArrayList<String> listaUm = new ArrayList<>();
 
         listaUm.add(primeiraParte());
 
         for (int i = 1; i < 8; i++) {
 
-            if (i == 1) {
-                listaUm.add(segundaParte("O", "elefante", "passarinhos"));
-            }
-            if (i == 2) {
-                listaUm.add("(Para não!)");
-                listaUm.add(segundaParte("A", "minhoquinha", "penguins"));
-            }
-            if (i == 3) {
-                listaUm.add(segundaParte("O", "canguru", "sapinho"));
-            }
-            if (i == 4) {
-                listaUm.add(terceiraParte());
-            }
-            if (i == 5) {
-                listaUm.add("Por isso...!");
-                listaUm.add(primeiraParte());
-            }
-            if (i == 6) {
-                listaUm.add(primeiraParte());
-            }
-            if (i == 7) {
-                listaUm.add(primeiraParte());
-            }
+            switch (i) {
+                case 1:
+                    listaUm.add(segundaParte("O", "elefante", "passarinhos"));
+                    break;
 
+                case 2:
+                    listaUm.add("(Para não!)");
+                    listaUm.add(segundaParte("A", "minhoquinha", "penguins"));
+                    break;
+
+                case 3:
+                    listaUm.add(segundaParte("O", "canguru", "sapinho"));
+                    break;
+
+                case 4:
+                    listaUm.add(terceiraParte());
+                    break;
+
+                case 5:
+                    listaUm.add("Por isso...!");
+                    listaUm.add(primeiraParte());
+                    break;
+
+                case 6:
+                    listaUm.add(primeiraParte(i));
+                    break;
+
+                case 7:
+                    listaUm.add(primeiraParte());
+                    break;
+
+            }
         }
 
         StringBuilder mostrarUm = new StringBuilder();
@@ -194,7 +225,7 @@ public class ErgueiAsMaos {
 
             switch (i) {
                 case 0:
-                    listaDois.add(quartaParte());
+                    listaDois.add(quartaParte(i));
                     parteCorpo += (listaCorpo[i]);
                     break;
 
@@ -209,7 +240,7 @@ public class ErgueiAsMaos {
                     break;
 
                 case 1, 3, 5:
-                    listaDois.add(quartaParte());
+                    listaDois.add(quartaParte(i));
                     parteCorpo += ", " + (listaCorpo[i]) + "\n";
                     break;
 
